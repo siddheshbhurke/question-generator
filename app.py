@@ -97,6 +97,8 @@ async def generate_questions(data: InputData):
     results = [generate_typed_question(data.use_case, data.context, qt, i) for i, qt in enumerate(qtypes[:10])]
     return {"questions": results}
 
-# TO RUN LOCALLY:
-# uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Use PORT provided by Render
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
 
